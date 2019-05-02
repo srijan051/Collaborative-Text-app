@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "552078306872",
+    "firebase_url": "https://collaborative-editor-d764e.firebaseio.com",
+    "project_id": "collaborative-editor-d764e",
+    "storage_bucket": "collaborative-editor-d764e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552078306872:android:9c11b7c26e0322af",
+        "android_client_info": {
+          "package_name": "com.example.collaborativetexteditor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "552078306872-v0j5ddtr7ju6fctk9ipimi7qdog3t5ff.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.collaborativetexteditor",
+            "certificate_hash": "fc1ebe097daecdca1332ff6b9b46342fc27db468"
+          }
+        },
+        {
+          "client_id": "552078306872-esck5lteamqf7vc7ba3dlocm0kah034g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyoPfs6DlBBpQq18nFKoSv-I72q2J9sFc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "552078306872-esck5lteamqf7vc7ba3dlocm0kah034g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
