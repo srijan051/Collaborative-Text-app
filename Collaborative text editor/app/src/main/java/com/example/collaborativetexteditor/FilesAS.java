@@ -1,25 +1,28 @@
 package com.example.collaborativetexteditor;
 
-public class FilesAS {
-    private String title;
-    private String text;
+import java.io.Serializable;
+
+public class FilesAS implements Serializable {
+    private String Title;
+    private String Text;
 
     public FilesAS() {
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        Title = title;
     }
 
     public String getText() {
-        return text;
+        return Text;
     }
 
     public void setText(String text) {
-        this.text = text;
+        Text = text;
     }
+
 }

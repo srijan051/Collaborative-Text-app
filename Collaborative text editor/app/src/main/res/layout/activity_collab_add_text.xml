@@ -44,7 +44,9 @@
                     android:ems="10"
                     android:gravity="left"
                     android:inputType="textMultiLine"
-                    android:text="@string/txt_enter_text"
+                    android:text=""
+                    android:hint="@string/txt_enter_text"
+                    android:textColorHint="@color/m_fontcolor"
                     android:textColor="@color/m_fontcolor" />
             </ScrollView>
 

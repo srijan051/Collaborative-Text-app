@@ -8,13 +8,13 @@ import android.widget.Button;
 
 public class homedemo extends AppCompatActivity {
 
-    Button add;
+    Button btaddTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homedemo);
-        add = findViewById(R.id.button_add);
-        add.setOnClickListener(new View.OnClickListener() {
+        btaddTitle = findViewById(R.id.button_add);
+        btaddTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openadd();
@@ -23,7 +23,7 @@ public class homedemo extends AppCompatActivity {
     }
 
     private void openadd() {
-        Intent intent = new Intent(this, CollabAddText.class);
+        Intent intent = new Intent(this, CollabAddTitle.class);
         startActivity(intent);
     }
 }
