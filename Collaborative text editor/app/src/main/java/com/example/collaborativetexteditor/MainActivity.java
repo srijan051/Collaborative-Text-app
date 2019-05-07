@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loginactivity_open(){
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, CollabAddTitle.class);
         startActivity(intent);
     }
 }

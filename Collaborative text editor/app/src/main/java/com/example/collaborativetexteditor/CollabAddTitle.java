@@ -1,6 +1,9 @@
 package com.example.collaborativetexteditor;
 
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,22 +16,27 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CollabAddTitle extends AppCompatActivity {
 
     DatabaseReference reff;
-    //FileSendfirebase fileSendfirebase;
     EditText etcollabaddtitle;
     Button btcollabsavetitle;
     FilesAS filesAS;
     ArrayList<String> title = new ArrayList<>();
+    String currentDateandTime;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collab_add_title);
+        //getting date time
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
+        currentDateandTime = sdf.format(new Date());
+
         reff = FirebaseDatabase.getInstance().getReference().child("Files");
-        //fileSendfirebase = new FileSendfirebase();
         filesAS = new FilesAS();
 
         etcollabaddtitle = findViewById(R.id.editText_collabAddtitle);
@@ -54,10 +62,13 @@ public class CollabAddTitle extends AppCompatActivity {
         }
     }
     public void aftrcheck(){
-
+        String id = reff.push().getKey();
+        filesAS.setFileid(id);
         filesAS.setTitle(etcollabaddtitle.getText().toString());
         filesAS.setText("");
-        reff.push().setValue(filesAS);
+        filesAS.setDate(currentDateandTime);
+
+        reff.child(id).setValue(filesAS);
 
         Toast toast = Toast.makeText(CollabAddTitle.this, "Successfully inserted",Toast.LENGTH_SHORT);
         toast.show();

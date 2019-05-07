@@ -19,54 +19,44 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Home extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE ="com.example.android.twoactivities.extra.MESSAGE";
-
 
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
     private ListView mListView;
-    ArrayList<String> arrayList;
+
     public ArrayList<FilesAS> filesASlist;
     FilesAS filesAS;
 
-
     private Button btaddTitle;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        myRef = FirebaseDatabase.getInstance().getReference("Files");
         mListView =findViewById(R.id.lv_files);
+        filesASlist =new ArrayList<>();
 
         btaddTitle = findViewById(R.id.button_add);
         btaddTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openadd();
-
             }
         });
-        arrayList = new ArrayList<>();
-        filesASlist =new ArrayList<>();
-        transf();
+
     }
 
-
-    private void transf() {
-
-        mAuth=FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef= mFirebaseDatabase.getReference().child("Files");
-        filesASlist.clear();
-
+    @Override
+    protected void onStart() {
+        super.onStart();
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -75,24 +65,21 @@ public class Home extends AppCompatActivity {
 
                     filesAS = ds.getValue(FilesAS.class);
                     filesASlist.add(filesAS);
-                    arrayList.add(filesAS.getTitle());
-                    Log.d("rec1data",""+ filesAS.getTitle());
                     mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                             FilesAS item = filesASlist.get(position);
-
                             Intent intent = new Intent(Home.this, CollabAddText.class);
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("OBJECT", item);
                             intent.putExtra(EXTRA_MESSAGE, bundle);
                             startActivity(intent);
-
                         }
                     });
+
                 }
-                ArrayAdapter adapter = new ArrayAdapter(Home.this, android.R.layout.simple_list_item_1,arrayList);
+                FileList adapter = new FileList(Home.this, filesASlist);
                 mListView.setAdapter(adapter);
             }
 
@@ -101,13 +88,10 @@ public class Home extends AppCompatActivity {
 
             }
         });
-
     }
+
     private void openadd() {
         Intent intent = new Intent(this, CollabAddTitle.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("OBJECT", filesASlist);
-        intent.putExtra(EXTRA_MESSAGE, bundle);
         startActivity(intent);
         Log.d("open","openadd clicked5");
 
