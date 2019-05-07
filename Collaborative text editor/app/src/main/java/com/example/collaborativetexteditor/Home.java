@@ -1,15 +1,20 @@
 package com.example.collaborativetexteditor;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -65,6 +70,19 @@ public class Home extends AppCompatActivity {
 
                     filesAS = ds.getValue(FilesAS.class);
                     filesASlist.add(filesAS);
+
+                    mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                        @Override
+                        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                            FilesAS filedel =filesASlist.get(position);
+                            String fid = filedel.getFileid();
+                            String title = filedel.getTitle();
+                            deleteDialog(fid, title);
+
+                            return false;
+                        }
+                    });
+
                     mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -77,7 +95,6 @@ public class Home extends AppCompatActivity {
                             startActivity(intent);
                         }
                     });
-
                 }
                 FileList adapter = new FileList(Home.this, filesASlist);
                 mListView.setAdapter(adapter);
@@ -94,7 +111,49 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent(this, CollabAddTitle.class);
         startActivity(intent);
         Log.d("open","openadd clicked5");
-
     }
+    /*
+    private void openadd(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.activity_collab_add_title, null);
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.setTitle("Add Title name");
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+    }
+    */
+    public void deleteDialog(final String fid, String title) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.activity_delete_file, null);
+        dialogBuilder.setView(dialogView);
 
+        final TextView textViewFileName = dialogView.findViewById(R.id.textView_deletefilename);
+        final Button buttondeleteok = dialogView.findViewById(R.id.button_ok);
+        final Button buttondeletecancel = dialogView.findViewById(R.id.button_cancel);
+
+        dialogBuilder.setIcon(R.drawable.ic_delete);
+        dialogBuilder.setTitle("Do you want to delete?");
+        textViewFileName.setText(title);
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+
+        buttondeleteok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Deleting
+                myRef.child(fid).removeValue();
+                alertDialog.dismiss();
+                Toast.makeText(Home.this,"File Deleted.",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        buttondeletecancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            alertDialog.dismiss();
+            }
+        });
+    }
 }

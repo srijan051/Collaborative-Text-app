@@ -24,7 +24,6 @@ public class CollabAddTitle extends AppCompatActivity {
     EditText etcollabaddtitle;
     Button btcollabsavetitle;
     FilesAS filesAS;
-    ArrayList<String> title = new ArrayList<>();
     String currentDateandTime;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
