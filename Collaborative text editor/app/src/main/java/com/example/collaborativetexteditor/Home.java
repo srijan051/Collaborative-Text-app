@@ -69,6 +69,11 @@ public class Home extends AppCompatActivity {
         pd.setMessage("Fetching Data...");
         pd.show();
 
+        //-------fetching
+
+
+        //--------------------
+
     }
 
     @Override
@@ -76,6 +81,11 @@ public class Home extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.home, menu);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(false);
     }
 
     //menu item selection
@@ -152,6 +162,7 @@ public class Home extends AppCompatActivity {
 
             }
         });
+
     }
 
     private void openadd() {

@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.collaborativetexteditor.R;
@@ -23,6 +24,7 @@ public class SignupActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     EditText etemail, etpassword, etconfpassword;
     Button btsignup;
+    TextView txt_login;
 
     ProgressDialog pd;
 
@@ -39,6 +41,14 @@ public class SignupActivity extends AppCompatActivity {
         etpassword = findViewById(R.id.editText_signup_password);
         etconfpassword = findViewById(R.id.editText_signup_confpassword);
         btsignup = findViewById(R.id.button_signup);
+        txt_login = findViewById(R.id.text_login);
+        txt_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginintent = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(loginintent);
+            }
+        });
         btsignup.setOnClickListener(new View.OnClickListener() {
            @Override
             public void onClick(View v) {

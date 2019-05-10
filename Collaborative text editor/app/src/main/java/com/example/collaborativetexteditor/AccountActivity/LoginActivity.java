@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                 usersignin();
             }
         });
-        authListener = new FirebaseAuth.AuthStateListener() {
+        /*authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser()!=null){
@@ -61,14 +61,14 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             }
-        };
+        };*/
     }
 
-    @Override
+    /*@Override
     protected void onStart() {
         super.onStart();
         firebaseAuth.addAuthStateListener(authListener);
-    }
+    }*/
 
     private void usersignin() {
         String email,password;
@@ -91,6 +91,15 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, Home.class);
                     startActivity(intent);
                 }
+
+                else {
+                    Toast toast1 = Toast.makeText(LoginActivity.this, "Login Fail", Toast.LENGTH_SHORT);
+                    toast1.show();
+                }
+                pd.dismiss();
+
+
+
             }
         });
 
