@@ -11,16 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Notification"></activity>
         <activity
             android:name=".CollabAddTitle"
-            android:excludeFromRecents="true">
-        </activity>
+            android:excludeFromRecents="true"></activity>
         <activity
             android:name=".Home"
-            android:excludeFromRecents="true"/>
+            android:excludeFromRecents="true" />
         <activity android:name=".homedemo" />
-        <activity android:name=".CollabAddText"
-            android:excludeFromRecents="true"/>
+        <activity
+            android:name=".CollabAddText"
+            android:excludeFromRecents="true" />
         <activity android:name=".AccountActivity.ResetPasswordActivity" />
         <activity android:name=".AccountActivity.SignupActivity" />
         <activity android:name=".AccountActivity.LoginActivity" />

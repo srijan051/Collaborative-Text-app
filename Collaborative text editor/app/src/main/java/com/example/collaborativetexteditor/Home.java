@@ -1,13 +1,18 @@
 package com.example.collaborativetexteditor;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,16 +39,20 @@ public class Home extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
     private ListView mListView;
+    ProgressDialog pd;
 
     public ArrayList<FilesAS> filesASlist;
     FilesAS filesAS;
 
-    private Button btaddTitle;
+    private FloatingActionButton btaddTitle;
+    //private Button btaddTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        pd = new ProgressDialog(this);
 
         myRef = FirebaseDatabase.getInstance().getReference("Files");
         mListView =findViewById(R.id.lv_files);
@@ -56,7 +65,36 @@ public class Home extends AppCompatActivity {
                 openadd();
             }
         });
+        pd.setMessage("Fetching Data...");
+        pd.show();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_notification:
+                Toast.makeText(this,"notification shown",Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.action_settings:
+                Toast.makeText(this,"setting shown",Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.action_logout:
+                Toast.makeText(this,"logout shown",Toast.LENGTH_SHORT).show();
+                return true;
+
+                default:
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -98,6 +136,7 @@ public class Home extends AppCompatActivity {
                 }
                 FileList adapter = new FileList(Home.this, filesASlist);
                 mListView.setAdapter(adapter);
+                pd.dismiss();
             }
 
             @Override
