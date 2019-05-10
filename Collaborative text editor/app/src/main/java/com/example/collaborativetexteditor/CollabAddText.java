@@ -31,11 +31,19 @@ public class CollabAddText extends AppCompatActivity {
     FilesAS filesAS;
     String currentDateandTime;
 
+    //inseerting notification
+    DatabaseReference reff;
+    NotificationPush notificationPush;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collab_add_text);
+
+        //inserting notification
+        reff = FirebaseDatabase.getInstance().getReference().child("Notification");
+        notificationPush = new NotificationPush();
 
         etcollabtitle = findViewById(R.id.editText_collabtitle);
         etcollabtext = findViewById(R.id.editText_collabtext);
@@ -58,6 +66,10 @@ public class CollabAddText extends AppCompatActivity {
             public void onClick(View v) {
                 String title = etcollabtitle.getText().toString().trim();
                 String text = etcollabtext.getText().toString().trim();
+                String notid = reff.push().getKey();
+                notificationPush.setNotification("File "+title + " has been updated");
+                notificationPush.setDate(currentDateandTime);
+                reff.child(notid).setValue(notificationPush);
 
                 if (TextUtils.isEmpty(title)){
                     etcollabtitle.setError("Title Required");
@@ -67,8 +79,6 @@ public class CollabAddText extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private boolean updatecollab(String id, String title, String text, String date){

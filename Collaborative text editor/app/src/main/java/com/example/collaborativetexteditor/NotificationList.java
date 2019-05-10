@@ -10,28 +10,30 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class FileList extends ArrayAdapter<FilesAS> {
+public class NotificationList extends ArrayAdapter<NotificationPush> {
     Activity context;
-    private ArrayList<FilesAS> filelist;
+    private ArrayList<NotificationPush> filelist;
 
-    public FileList(Activity context, ArrayList<FilesAS> filelist) {
-        super(context, R.layout.activity_listlayout, filelist);
+    public NotificationList(Activity context, ArrayList<NotificationPush> filelist) {
+        super(context, R.layout.activity_listlayoutnotification, filelist);
         this.context = context;
         this.filelist = filelist;
+
     }
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.activity_listlayout,null,true);
-        TextView textViewTitle = listViewItem.findViewById(R.id.textView_title);
+        View listViewItem = inflater.inflate(R.layout.activity_listlayoutnotification,null,true);
+        TextView textViewNotification = listViewItem.findViewById(R.id.textView_notification);
         TextView textViewTime = listViewItem.findViewById(R.id.textView_time);
-        FilesAS filesAS = filelist.get(position);
+        NotificationPush notificationPush = filelist.get(position);
 
-        textViewTitle.setText(filesAS.getTitle());
-        textViewTime.setText(filesAS.getDate());
+        textViewNotification.setText(notificationPush.getNotification());
+        textViewTime.setText(notificationPush.getDate());
         return listViewItem;
     }
-
 }
+
+

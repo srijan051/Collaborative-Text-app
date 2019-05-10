@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.collaborativetexteditor.AccountActivity.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -77,11 +78,14 @@ public class Home extends AppCompatActivity {
         return true;
     }
 
+    //menu item selection
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_notification:
                 Toast.makeText(this,"notification shown",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, Notification.class);
+                startActivity(intent);
                 return true;
 
             case R.id.action_settings:
@@ -90,6 +94,10 @@ public class Home extends AppCompatActivity {
 
             case R.id.action_logout:
                 Toast.makeText(this,"logout shown",Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                Intent intent1 = new Intent(this, LoginActivity.class);
+                startActivity(intent1);
+                finish();
                 return true;
 
                 default:

@@ -29,4 +29,5 @@
     <string name="button_add">add</string>
     <string name="txt_time">Time</string>
     <string name="txt_setting">Setting</string>
+    <string name="notification">Notification</string>
 </resources>

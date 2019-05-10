@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.collaborativetexteditor.Home;
 import com.example.collaborativetexteditor.R;
-import com.example.collaborativetexteditor.homedemo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser()!=null){
-                    Intent intent = new Intent(LoginActivity.this, homedemo.class);
+                    Intent intent = new Intent(LoginActivity.this, Home.class);
                     startActivity(intent);
                 }
             }
@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast toast1 = Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT);
                     toast1.show();
 
-                    Intent intent = new Intent(LoginActivity.this, homedemo.class);
+                    Intent intent = new Intent(LoginActivity.this, Home.class);
                     startActivity(intent);
                 }
             }

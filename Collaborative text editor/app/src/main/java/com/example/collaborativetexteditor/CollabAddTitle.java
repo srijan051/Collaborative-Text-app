@@ -21,9 +21,11 @@ import java.util.Date;
 public class CollabAddTitle extends AppCompatActivity {
 
     DatabaseReference reff;
+    DatabaseReference notification;
     EditText etcollabaddtitle;
     Button btcollabsavetitle;
     FilesAS filesAS;
+    NotificationPush notificationPush;
     String currentDateandTime;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -36,7 +38,10 @@ public class CollabAddTitle extends AppCompatActivity {
         currentDateandTime = sdf.format(new Date());
 
         reff = FirebaseDatabase.getInstance().getReference().child("Files");
+        notification = FirebaseDatabase.getInstance().getReference().child("Notification");
+
         filesAS = new FilesAS();
+        notificationPush = new NotificationPush();
 
         etcollabaddtitle = findViewById(R.id.editText_collabAddtitle);
         btcollabsavetitle = findViewById(R.id.button_save_collab_title);
@@ -66,8 +71,11 @@ public class CollabAddTitle extends AppCompatActivity {
         filesAS.setTitle(etcollabaddtitle.getText().toString());
         filesAS.setText("");
         filesAS.setDate(currentDateandTime);
+        notificationPush.setNotification("File "+ etcollabaddtitle.getText().toString() +" has been created");
+        notificationPush.setDate(currentDateandTime);
 
         reff.child(id).setValue(filesAS);
+        notification.child(id).setValue(notificationPush);
 
         Toast toast = Toast.makeText(CollabAddTitle.this, "Successfully inserted",Toast.LENGTH_SHORT);
         toast.show();
@@ -75,6 +83,7 @@ public class CollabAddTitle extends AppCompatActivity {
         etcollabaddtitle.setText("");
         Intent intent = new Intent(CollabAddTitle.this,Home.class);
         startActivity(intent);
+        finish();
 
     }
 

@@ -18,7 +18,6 @@
         <activity
             android:name=".Home"
             android:excludeFromRecents="true" />
-        <activity android:name=".homedemo" />
         <activity
             android:name=".CollabAddText"
             android:excludeFromRecents="true" />
