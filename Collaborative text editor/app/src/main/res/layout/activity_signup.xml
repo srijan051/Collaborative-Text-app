@@ -26,14 +26,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:paddingBottom="60dp">
+                android:paddingBottom="30dp">
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="140dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="80dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintHorizontal_bias=".498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:src="@drawable/ic_collabtext_icon" />
@@ -129,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.1"
-                android:paddingTop="60dp"
+                android:paddingTop="20dp"
                 android:text="@string/txt_old_account"
                 android:textColor="#d9e5f3" />
         </LinearLayout>

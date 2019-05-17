@@ -75,7 +75,7 @@ public class Home extends AppCompatActivity {
         //--------------------
 
     }
-
+//---------menu home ----------
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -114,7 +114,7 @@ public class Home extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
+//-------------menu------------
     @Override
     protected void onStart() {
         super.onStart();
